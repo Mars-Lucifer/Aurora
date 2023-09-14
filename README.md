@@ -1,2 +1,2 @@
 # Aurora-web
-Website for a computer voice assistant, Aurora
+Voice assistant to help you interact with your PC
