@@ -1,0 +1,15 @@
+{
+  "name": "aurora-v0.0.1",
+  "version": "1.0.0",
+  "description": "Voice assistent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "Mars Lucifer",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^26.2.1"
+  }
+}

@@ -1,0 +1,133 @@
+.container {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.content {
+    height: 71%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.command {
+    display: flex;
+    gap: 6vh;
+    flex-direction: column;
+}
+
+.command p {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 16px;
+    color: #00040D;
+    opacity: 0.8;
+    max-width: 20vw;
+
+    animation-name: command;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+.command .t1 {animation-delay: 600ms;}
+.command .t2 {animation-delay: 300ms;}
+
+.right {text-align: right;}
+
+.assistent {
+    position: relative;
+    width: 40vh;
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.assistent .circle {
+    position: absolute;
+    height: 95%;
+    width: 95%;
+    background-color: #00040D;
+    opacity: 0.7;
+    border-radius: 100vh;
+    box-shadow: -6px -6px 12px 0px rgba(82, 122, 204, 0.30);
+    z-index: 2;
+
+    animation-name: circle;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+.assistent .cube {
+    position: absolute;
+    height: 80%;
+    width: 80%;
+    background-color: #00040D;
+    opacity: 0.8;
+    border-radius: 4vh;
+    box-shadow: 6px 6px 12px 0px rgba(176, 69, 229, 0.20);
+    rotate: 45deg;
+    z-index: 3;
+
+    animation-name: circle;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-delay: 400ms;
+}
+
+.assistent .logo {
+    position: absolute;
+    height: 55%;
+    width: 55%;
+    background-image: url("../img/Logo.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 4;
+
+    animation-name: circle;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-delay: 600ms;
+}
+
+.light {
+    filter: blur(2px);
+    opacity: 0.3;
+}
+
+
+
+/* Анимашки */
+@keyframes command {
+    0% {
+        transform: translateY(0);
+    }
+    25% {
+        transform: translateY(4px);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes circle {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
