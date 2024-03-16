@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
+@import url('./base.css');
+@import url('./background.css');
 
 body {
     height: 100vh;

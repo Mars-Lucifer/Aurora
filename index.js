@@ -1,4 +1,3 @@
-const { app } = require("electron");
-const createWindow = require('./scripts/app');
+const startApps = require('./scripts/tray');
 
-app.whenReady().then(() => {createWindow()})
+startApps();
