@@ -2,7 +2,7 @@ const net = require('net');
 
 async function connect(message) {
     return new Promise((resolve, reject) => {
-        const client = net.createConnection({ port: 3150 }, () => {
+        const client = net.createConnection({ port: 3150, host: '127.0.0.1' }, () => {
 
             client.write(message);
 
@@ -22,15 +22,4 @@ async function connect(message) {
     });
 }
 
-async function main() {
-    // Пример использования
-    let i = 0;
-    while (true) {
-        i++;
-        await connect(`Hello cl2 - x${i}`);
-    }
-}
-
-main().catch(err => {
-    console.error(err);
-});
+module.exports = connect;

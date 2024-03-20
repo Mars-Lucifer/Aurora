@@ -17,10 +17,6 @@ async def connect(message):
         await writer.wait_closed()
 
 async def main():
-    # Пример использования
-    i = 0
-    while True:
-        i+=1
-        await connect(f"Hello cl2 - x{i}")
+    await connect("Hello. This client 2")
 
 asyncio.run(main())

@@ -14,6 +14,7 @@ async def handle_client(reader, writer):
             
             message = data.decode()
             addr = writer.get_extra_info('peername')
+            print(f"Connect: {addr}")
 
             # Отправляем сообщение всем клиентам, кроме отправителя
             for client in clients:
@@ -21,10 +22,11 @@ async def handle_client(reader, writer):
                     client.write(f"{addr[0]}:{addr[1]}: {message}".encode())
                     await client.drain()
     except ConnectionResetError:
-        pass  # Обработка отключения клиента
+        print(f"Disconnect (Error): {addr}")
 
     clients.remove(writer)
     writer.close()
+    print(f"Disconnect: {addr}")
 
 async def main():
     server = await asyncio.start_server(
