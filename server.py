@@ -19,7 +19,7 @@ async def handle_client(reader, writer):
             # Отправляем сообщение всем клиентам, кроме отправителя
             for client in clients:
                 if client != writer:
-                    client.write(f"{addr[0]}:{addr[1]}: {message}".encode())
+                    client.write(message.encode())
                     await client.drain()
     except ConnectionResetError:
         print(f"Disconnect (Error): {addr}")

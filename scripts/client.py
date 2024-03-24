@@ -18,7 +18,7 @@ async def connect(message = None, type = "active"):
             await writer.drain()
 
         # Получаем данные
-        return data.decode()
+        return data.decode().split("%_")
     finally:
         # Закрываем соединение
         writer.close()
