@@ -11,12 +11,13 @@ async function connect(options) {
             };
 
             client.on('data', data => {
+                data = data.toString().toLowerCase().split("%_")
                 if (type == "passive") {
-                    client.write("ok");
+                    client.write(`${data[1]}%_${data[0]}%_answer`);
                 };
 
                 client.end();
-                return resolve(data.toString().split("%_"));
+                return resolve(data);
             });
 
             client.on('end', () => {});

@@ -1,4 +1,4 @@
-import asyncio
+import asyncio, sys
 
 clients = []
 
@@ -13,6 +13,10 @@ async def handle_client(reader, writer):
                 break
             
             message = data.decode()
+            # Обработка завершения
+            if (message.lower().split("%_")[2] == 'exit'):
+                sys.exit()
+            
             addr = writer.get_extra_info('peername')
             print(f"Connect: {addr}")
 

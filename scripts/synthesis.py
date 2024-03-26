@@ -1,30 +1,34 @@
 from elevenlabs import play, Voice, VoiceSettings
 from elevenlabs.client import ElevenLabs
 from client import connect
-import asyncio
-from playsound import playsound
-import random
+import asyncio, random, pyglet
 
 # Файлы голоса
 voice = [
-    {'ActiveOne': '../voice/activationOne.mp3',
-    'ActiveTwo': '../voice/activationTwo.mp3'},
+    ['../voice/activationOne.mp3',
+    '../voice/activationTwo.mp3'],
 
-    {'CompleteOne': '../voice/completingOne.mp3',
-    'CompleteTwo': '../voice/completingTwo.mp3'}
+    ['../voice/completingOne.mp3',
+    '../voice/completingTwo.mp3'],
+
+    ['../voice/start.mp3']
 ]
 
 # Ключ API
 with open('../key.txt', 'r') as file:
     key = file.read().strip()
+    file.close()
 client = ElevenLabs(api_key=key,)
 
 
 # Первичный синтез
 def synthesisOne(select):
-    randomKey = random.choice(list(voice[select].keys()))
-    audio = voice[select][randomKey]
-    playsound(audio)
+    audio = random.choice(voice[select])
+    
+    # Проигрывание аудиофайла
+    sound = pyglet.media.load(audio, streaming=False)
+    sound.play()
+    pyglet.app.run()
 
 # Вторичный синтез
 def synthesisTwo(text):
@@ -46,7 +50,7 @@ async def main():
     if result[0] == "synthesis":
         if result[3] == "0":
             synthesisOne(int(result[2]))
-        if result == "1":
+        elif result[3] == "1":
             synthesisTwo(result[2])
 
 while True:

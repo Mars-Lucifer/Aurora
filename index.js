@@ -1,12 +1,13 @@
 const startApps = require('./scripts/tray');
 const connect = require('./scripts/client');
 
-async function main() {
-    await connect(`Hello. This client 1`);
+// Включаем звук
+async function start() {
+    console.log(await connect({ message: 'synthesis%_GUI%_2%_0' }));
 };
-
-main().catch(err => {
+start().catch(err => {
     console.error(err);
 });
 
+// Запускаем приложение
 startApps();

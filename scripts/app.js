@@ -9,6 +9,13 @@ const createWindow = () => {
         icon: "./style/img/Logo.png"
     });
 
+    win.on('close', (ev) => {
+        if (win?.isVisible()) {
+            ev.preventDefault();
+            win.hide();
+        }
+    });
+
     win.loadFile("index.html");
     // win.webContents.openDevTools();
 }
