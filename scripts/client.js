@@ -7,13 +7,18 @@ async function connect(options) {
         const client = net.createConnection({ port: 3150, host: '127.0.0.1' }, () => {
 
             if (type == "active") {
-                client.write(message);
+                client.write(JSON.stringify(message));
             };
 
             client.on('data', data => {
-                data = data.toString().toLowerCase().split("%_")
+                data = JSON.parse(data.toString());
                 if (type == "passive") {
-                    client.write(`${data[1]}%_${data[0]}%_answer`);
+                    const answer = {
+                        recipient: data.sender,
+                        sender: data.recipient,
+                        content: "answer"
+                    };
+                    client.write(JSON.stringify(answer));
                 };
 
                 client.end();

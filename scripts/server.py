@@ -1,4 +1,4 @@
-import asyncio, sys
+import asyncio, sys, json
 
 clients = []
 
@@ -12,9 +12,9 @@ async def handle_client(reader, writer):
             if not data:
                 break
             
-            message = data.decode()
+            message = json.loads(data.decode())
             # Обработка завершения
-            if (message.lower().split("%_")[2] == 'exit'):
+            if (message["content"]== 'exit'):
                 sys.exit()
             
             addr = writer.get_extra_info('peername')
@@ -23,7 +23,7 @@ async def handle_client(reader, writer):
             # Отправляем сообщение всем клиентам, кроме отправителя
             for client in clients:
                 if client != writer:
-                    client.write(message.encode())
+                    client.write(json.dumps(message).encode())
                     await client.drain()
     except ConnectionResetError:
         print(f"Disconnect (Error): {addr}")
