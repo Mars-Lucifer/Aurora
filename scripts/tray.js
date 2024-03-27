@@ -4,7 +4,7 @@ const connect = require('./client');
 
 const AllExit = () => {
     async function main() {
-        console.log(await connect({ message: 'all%_GUI%_exit' }));
+        console.log(await connect({ message: { recipient: "all", sender: "GUI main", content: "exit" }, type: "active" }));
     };
 
     main().catch(err => {

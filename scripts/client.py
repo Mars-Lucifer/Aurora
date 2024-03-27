@@ -26,6 +26,7 @@ async def connect(recipient = None, sender = None, content = None, type = "activ
                 "sender": data["recipient"],
                 "content": "answer"
             }
+            answer = json.dumps(answer)
         
             # Отправляем ответ
             if (type == "passive"):

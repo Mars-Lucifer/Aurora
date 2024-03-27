@@ -18,7 +18,7 @@ voice = [
 with open('../key.txt', 'r') as file:
     key = file.read().strip()
     file.close()
-client = ElevenLabs(api_key=key,)
+client = ElevenLabs(api_key=key)
 
 
 # Первичный синтез
@@ -47,11 +47,11 @@ def synthesisTwo(text):
 async def main():
     result = await connect(type="passive")
 
-    if result[0] == "synthesis":
-        if result[3] == "0":
-            synthesisOne(int(result[2]))
-        elif result[3] == "1":
-            synthesisTwo(result[2])
+    if "synthesis" in result["recipient"]:
+        if result["content"][1] == "0":
+            synthesisOne(int(result["content"][0]))
+        elif result["content"][1] == "1":
+            synthesisTwo(result["content"][0])
 
 while True:
     asyncio.run(main())

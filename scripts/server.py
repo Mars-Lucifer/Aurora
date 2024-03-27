@@ -14,7 +14,7 @@ async def handle_client(reader, writer):
             
             message = json.loads(data.decode())
             # Обработка завершения
-            if (message["content"]== 'exit'):
+            if (message["content"] == 'exit'):
                 sys.exit()
             
             addr = writer.get_extra_info('peername')
