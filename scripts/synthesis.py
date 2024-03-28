@@ -1,7 +1,7 @@
 from elevenlabs import play, Voice, VoiceSettings
 from elevenlabs.client import ElevenLabs
 from client import connect
-import asyncio, random, pyglet
+import asyncio, random, pyglet, json
 
 # Файлы голоса
 voice = [
@@ -15,10 +15,9 @@ voice = [
 ]
 
 # Ключ API
-with open('../key.txt', 'r') as file:
-    key = file.read().strip()
-    file.close()
-client = ElevenLabs(api_key=key)
+with open('../key.json', 'r') as file:
+    key_data = json.load(file)
+    api_key = key_data["elevenlabs_key"]
 
 
 # Первичный синтез
