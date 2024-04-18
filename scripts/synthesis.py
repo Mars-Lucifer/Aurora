@@ -1,7 +1,7 @@
-from elevenlabs import play, Voice, VoiceSettings
+from elevenlabs import play, Voice
 from elevenlabs.client import ElevenLabs
 from client import connect
-import asyncio, random, pyglet, json
+import asyncio, random, json, playsound
 
 # Файлы голоса
 voice = [
@@ -14,10 +14,13 @@ voice = [
     ['../voice/start.mp3']
 ]
 
-# Ключ API
+
+# Ключ API и клиент
 with open('../key.json', 'r') as file:
     key_data = json.load(file)
     api_key = key_data["elevenlabs_key"]
+
+client = ElevenLabs(api_key=api_key)
 
 
 # Первичный синтез
@@ -25,19 +28,16 @@ def synthesisOne(select):
     audio = random.choice(voice[select])
     
     # Проигрывание аудиофайла
-    sound = pyglet.media.load(audio, streaming=False)
-    sound.play()
-    pyglet.app.run()
+    playsound.playsound(audio, True)
 
 # Вторичный синтез
 def synthesisTwo(text):
     audio = client.generate(
     text=text,
     voice=Voice(
-        voice_id='CyvhG5XCUhl0VdMRKnDN',
-        settings=VoiceSettings(stability=0.5, similarity_boost=0.75, style=0.0, use_speaker_boost=True)
+        voice_id='CyvhG5XCUhl0VdMRKnDN'
     ),
-    model="eleven_multilingual_v2"
+    model="eleven_multilingual_v2",
     )
     play(audio)
 
@@ -52,5 +52,5 @@ async def main():
         elif result["content"][1] == "1":
             synthesisTwo(result["content"][0])
 
-while True:
-    asyncio.run(main())
+
+asyncio.run(main())
