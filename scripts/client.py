@@ -19,7 +19,7 @@ async def connect(recipient = None, sender = None, content = None, type = "activ
                 await writer.drain()
 
             # Ждем ответа
-            data = await reader.read(100)
+            data = await reader.read(1024)
             data = json.loads(data.decode())
             answer = {
                 "recipient": data["sender"],
